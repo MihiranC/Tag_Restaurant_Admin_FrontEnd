@@ -12,5 +12,5 @@ import { PrimeConfig } from './prime.config';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'MiIB';
+  title = 'TagRest';
 }
