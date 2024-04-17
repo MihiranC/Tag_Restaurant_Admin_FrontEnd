@@ -12,7 +12,7 @@
         "primaryCentralLoginApiUrl": "http://192.168.8.6:5906",
         "primaryCentralApiUrl": "http://192.168.8.6:5905",
         "primaryCommonApiUrl": "http://192.168.8.6:5907",
-        "primaryURL"  : "https://luckewallet.com:7003",
+        "primaryURL"  : "https://adminapi.tagteamengineering.lk", 
         "reportURL" : "http://192.168.8.6:5103/CommonReport.aspx",
         "HNB_PABX" : "https://callcenter.hnbfinance.lk/call.php",
 
