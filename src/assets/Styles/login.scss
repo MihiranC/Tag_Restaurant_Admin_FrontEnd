@@ -1,0 +1,53 @@
+.loginbg {
+  background-image: url(../Images/LogingBGs/1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 95vh;
+  width: 100%;
+  overflow: hidden;
+  transition: background-image 0.5s ease-in-out;
+}
+
+.container-fluid-login {
+  padding: 0px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  background-color: rgb(207, 207, 207);
+}
+
+.login-form-div {
+  background-color: rgba(250, 249, 249, 0.689);
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0px 10px;
+  padding: 10px;
+  padding-bottom: 25px;
+  position: relative;
+}
+
+.login-footer {
+  height: 5vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(207, 207, 207);
+}
+
+.title-div{
+  width: 100%;
+  color: white;
+  font-size: large;
+  font-weight: 500;
+  text-align: center;
+  //margin: 0px 10px;
+  margin-top: 10vh;
+}
+
+.title-div-main{
+  width: 100%;
+  color: white;
+  font-size: xx-large;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.5cm;
+  margin: 0px 10px;
+}
