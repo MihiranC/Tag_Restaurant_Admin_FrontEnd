@@ -2,8 +2,10 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PrimeConfig } from '../prime.config';
-import { PageHeaders } from '../Models/PageHeaders';
-import { Pages } from '../Models/Pages';
+import { MenuService } from '../Services/Menu.service';
+import { MessagesComponent } from '../messages/messages.component';
+import { MainMenu, SubMenu } from '../Models/Menu';
+import { UserService } from '../Services/User.service';
 
 @Component({
   selector: 'app-common-layout',
@@ -17,100 +19,69 @@ export class CommonLayoutComponent {
   constructor(
     private renderer: Renderer2,
     private router: Router,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,    
+    public MenuService: MenuService,
+    public UserService: UserService,        
+    public Router: Router,
   ) { }
 
 
-  mainMenues: PageHeaders[] = [];
-  subMenues: Pages[] = [];
+  @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
+
+  mainMenues: MainMenu[] = [];
+  subMenues: SubMenu[] = [];
 
   mainTitle: string = "";
   username: string = ''
+  userid : number = Number(sessionStorage.getItem("LoggedUserID")!);
 
   isShownMenu : boolean = false;
 
   ngAfterViewInit(): void {
-    this.username = 'Gayan';
+    //this.username = 'Gayan';
     //this.username = sessionStorage.getItem("userName")!;
   }
 
   ngOnInit() {
-    var demoSubMenu: Pages[] = []
-    demoSubMenu.push({
-      pageName: "Sub menu 1",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    }, {
-      pageName: "Sub menu 2",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    }, {
-      pageName: "Sub menu 3",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    })
-
-    var demoSubMenu2: Pages[] = []
-    demoSubMenu2.push({
-      pageName: "Sub menu 1",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    }, {
-      pageName: "Sub menu 2",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    }, {
-      pageName: "Sub menu 3",
-      path: "",
-      class: "",
-      fontsize: "",
-      selected: false
-    })
-
-    this.mainMenues.push({
-      pageName: "Home",
-      pages: demoSubMenu,
-      expanded: true,
-      icon: 'pi pi-home'
-    }, {
-      pageName: "Booking",
-      pages: demoSubMenu2,
-      expanded: true,
-      icon: 'pi pi-key'
-    }, {
-      pageName: "Payment",
-      pages: demoSubMenu2,
-      expanded: true,
-      icon: 'pi pi-dollar'
-    }, {
-      pageName: "Users",
-      pages: demoSubMenu2,
-      expanded: true,
-      icon: 'pi pi-user'
-    }, {
-      pageName: "References",
-      pages: demoSubMenu2,
-      expanded: true,
-      icon: 'pi pi-tags'
-    }, {
-      pageName: "Reports",
-      pages: demoSubMenu2,
-      expanded: true,
-      icon: 'pi pi-server'
-    })
-    this.mainTitle = this.mainMenues[0].pageName + " | " + this.mainMenues[0].pages![0].pageName
+    this.SelectUser();
+    this.loadMenues();
   };
 
+
+  loadMenues(){
+    this.MenuService.GetMemues(this.userid)
+    .subscribe({
+      next: (data: any) => {
+        if (data.code == "1000") {
+          this.mainMenues = data.data          
+          this.mainTitle = this.mainMenues[0].headerName + " | " + this.mainMenues[0].pages![0].pageName
+          this.mainMenues[0].pages![0].selected = true
+          this.mainMenues[0].expanded = true 
+        } else {
+          this.messagesComponent?.showError(data.message);
+        }
+      },
+      error: (error: any) => {
+        this.messagesComponent?.showError(error);
+      },
+    });
+  }
+
+  SelectUser(){
+    this.UserService.ReturnUsers(this.userid,'')
+    .subscribe({
+      next: (data: any) => {
+        if (data.code == "1000") {
+          this.username = data.data[0].firstName
+        } else {
+          this.messagesComponent?.showError(data.message);
+        }
+      },
+      error: (error: any) => {
+        this.messagesComponent?.showError(error);
+      },
+    });
+  }
 
   showHideMenu() {
     const menu = this.elementRef.nativeElement.querySelector('.nav-bar-container');
@@ -128,7 +99,7 @@ export class CommonLayoutComponent {
   }
 
   goToPage(pageIndex: number, headerIndex: number) {
-    this.mainTitle = this.mainMenues[headerIndex].pageName + " | " + this.mainMenues[headerIndex].pages![pageIndex].pageName;
+    this.mainTitle = this.mainMenues[headerIndex].headerName + " | " + this.mainMenues[headerIndex].pages![pageIndex].pageName;
     this.mainMenues[headerIndex].pages![pageIndex].selected = true;
     this.mainMenues[headerIndex].pages!.forEach((submenu, index) => {
       if(index!==pageIndex){
@@ -144,5 +115,7 @@ export class CommonLayoutComponent {
         });
       }
     });
+
+    this.Router.navigate(['/app/'+this.mainMenues[headerIndex].pages![pageIndex].path])
   }
 }
