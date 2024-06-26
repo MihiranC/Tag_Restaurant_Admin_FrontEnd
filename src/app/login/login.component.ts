@@ -1,16 +1,15 @@
 
-import { Component, NgZone, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, NgZone,ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { PrimeConfig } from '../prime.config';
 
 import { LoginService } from '../Services/Login.service';
-import { login } from '../Models/loginOld';
 import { Response } from '../Models/Response';
 import { Router } from '@angular/router';
 import { MessagesComponent } from '../messages/messages.component';
 import { Login } from '../Models/LoginModel';
-import { Observable, Subscription, interval, map, timer } from 'rxjs';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,14 +23,14 @@ export class LoginComponent {
   @ViewChild(FormGroupDirective, { static: false }) LoginFormDirective: FormGroupDirective | undefined
   @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
 
-  loginformGroup: FormGroup | undefined;
   formData: any = {};
-  LoginObj: login = new login();
+
   ResponseObj: Response = new Response();
+  
+  LoginObject: Login = new Login()
 
   LoginForm: FormGroup | undefined;
 
-  LoginObject: Login = new Login()
   LoginList: Login[] | undefined;
 
   router: any;
@@ -56,8 +55,8 @@ export class LoginComponent {
     private zone: NgZone
   ) {
 
-    this.loginformGroup = this.fb.group({
-      username: new FormControl<object | null>(null),
+    this.LoginForm = this.fb.group({
+      username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
 
@@ -68,10 +67,10 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
-    this.LoginForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl('', Validators.required)
-    });
+    // this.LoginForm = new FormGroup({
+    //   username: new FormControl(),
+    //   password: new FormControl('', Validators.required)
+    // });
     this.changeBackgroundImage();
   }
 
@@ -87,7 +86,7 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  Login() {
     this.LoginObject.username = this.LoginForm!.value.username;
     this.LoginObject.password = this.LoginForm!.value.password;
     this.LoginService.verifiedUserCredentials(this.LoginObject)
@@ -95,7 +94,7 @@ export class LoginComponent {
         next: (data: any) => {
           if (data.code == "1000") {
             sessionStorage.setItem('LoggedUserID', data.data.userID)
-            this.Router.navigate(['/Dashboard'])
+            this.Router.navigate(['/app/home'])
             this.clearForm();
           } else {
             this.messagesComponent?.showError(data.message);

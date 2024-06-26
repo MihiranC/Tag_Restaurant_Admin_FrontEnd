@@ -32,13 +32,14 @@ export class LoginService {
 
 
   //change Password Request
-  ChangePasswordForUserRequest(userInput: string ): Observable<Response> {
-    return this.HttpService.getData('api/TGAdmin/Login/UserChangePasswordRequest',`userInput=${userInput}`);
+  ChangePasswordForUserRequest(parameter: string): Observable<Response>{
+    return this.HttpService.getData('api/TGAdmin/Login/UserChangePasswordRequest',parameter.trim())
   }
 
   //change Password
-  ChangePasswordForUser(ChangePasswordObject: ChangePassword ): Observable<Response>{
+  UserChangePassword(ChangePasswordObject: ChangePassword ): Observable<Response>{
     return this.HttpService.postData(ChangePasswordObject, 'api/TGAdmin/Login/UserChangePassword')
   }
+  
 
 }

@@ -62,9 +62,13 @@ export class HttpService {
     return this.http.get(url, { responseType: 'text' })
       .pipe(
         map((encryptedResponse: any) => {
-          const decryptedResponse = this.EncryptionService.decryptResponse(JSON.parse(encryptedResponse) as Response);
-          return decryptedResponse;
+          //const decryptedResponse = this.EncryptionService.decryptResponse(JSON.parse(encryptedResponse) as Response);
+          return JSON.parse(encryptedResponse);
         }),
+        // map((encryptedResponse: any) => {
+        //   const decryptedResponse = this.EncryptionService.decryptResponse(JSON.parse(encryptedResponse) as Response);
+        //   return decryptedResponse;
+        // }),
         catchError((error: any) => {
           if(error.status==404){
             throw("404");
