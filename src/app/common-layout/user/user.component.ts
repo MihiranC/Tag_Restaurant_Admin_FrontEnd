@@ -1,18 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-user',
-//   standalone: true,
-//   imports: [],
-//   templateUrl: './user.component.html',
-//   styleUrl: './user.component.scss'
-// })
-// export class UserComponent {
-
-// }
-
-
-
 import { Component, NgZone,ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -33,7 +18,7 @@ import { Subscription} from 'rxjs';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
-export class LoginComponent {
+export class UserComponent {
 
   @ViewChild(FormGroupDirective, { static: false }) UserFormDirective: FormGroupDirective | undefined
   @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
