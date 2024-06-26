@@ -1,1 +1,115 @@
-<p>user works!</p>
+<!-- added with users -->
+<div class="row">
+    <div class="col-md-12">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Fill User Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="UserForm!" (submit)="onSubmit()">
+            <div class="row" style="display: none;">
+              <!-- <div class="col-md-8">
+                <mat-form-field class="w-100">
+                  <mat-label>User ID</mat-label>
+                  <input matInput type="text" formControlName="userID">
+                </mat-form-field>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+
+                <div class="p-field p-fluid">
+                  <label>User Name</label>
+                  <input pInputText id="userName"  type="text" formControlName="username" required >
+                </div>
+                
+              </div>
+              <div class="col-md-4">
+                <div class="p-field p-fluid">
+                  <label>Mobile Number</label>
+                  <input pInputText type="text" formControlName="mobileNo" required mask="(000) 000 00 00">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="p-field p-fluid">
+                    <label>E mail Address</label>
+                  <input pInputText type="email" formControlName="email" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>First Name</label>
+                  <input pInputText type="text" formControlName="firstName" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>Last Name</label>
+                  <input pInputText type="text" formControlName="lastName" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>Address Line 01</label>
+                  <input pInputText type="text" formControlName="addressLine1" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>Address Line 02</label>
+                  <input pInputText type="text" formControlName="addressLine2" >
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>Address Line 03</label>
+                  <input pInputText type="text" formControlName="addressLine3">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-field p-fluid">
+                  <label>Address Line 04</label>
+                  <input pInputText type="text" formControlName="addressLine4">
+                </div>
+              </div>
+            </div>
+  
+  
+            <div class="row">
+              <div class="col-md-4">
+  
+              </div>
+              <div class="col-md-4">
+  
+              </div>
+              <div class="col-md-4">
+                <div class="col-lg-12">
+                  <div class="btn-group w-100">
+                    <button class="btn btn-success col fileinput-button" type="submit" [disabled]="UserForm?.invalid">
+                      <i class="fas fa-plus"></i>
+                      <span>{{OperationBtnText}}</span>
+                    </button>
+                    <button class="btn btn-warning col cancel" type="button" (click)="clearForm()">
+                      <i class="fas fa-times-circle"></i>
+                      <span>Clear</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  </div>
