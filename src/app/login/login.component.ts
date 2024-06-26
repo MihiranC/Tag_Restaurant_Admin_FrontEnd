@@ -94,7 +94,7 @@ export class LoginComponent {
         next: (data: any) => {
           if (data.code == "1000") {
             sessionStorage.setItem('LoggedUserID', data.data.userID)
-            this.Router.navigate(['/app/home'])
+            this.Router.navigate(['/app/Dashboard'])
             this.clearForm();
           } else {
             this.messagesComponent?.showError(data.message);

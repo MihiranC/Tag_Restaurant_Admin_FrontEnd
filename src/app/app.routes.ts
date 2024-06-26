@@ -16,8 +16,13 @@ export const routes: Routes = [
         children: [
           {
             title: 'Myfi | Home',
-            path: 'home', // child route path
+            path: 'Dashboard', // child route path
             loadComponent:() => import('./common-layout/dashboard/dashboard.component').then(m=>m.DashboardComponent),
+          },
+          {
+            title: 'Myfi | Config User',
+            path: 'User', // child route path
+            loadComponent:() => import('./common-layout/user/user.component').then(m=>m.UserComponent),
           },
           {
             title: 'Bill | Home',
