@@ -7,6 +7,8 @@ import { AllAccountSummery } from '../../Models/AccountDetails';
 import { EncryptionService } from '../../Services/encryption.service';
 import { error } from 'console';
 import { MessagesComponent } from '../../messages/messages.component';
+import { UserService } from '../../Services/User.service';
+import { Users } from '../../Models/UserModel';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +18,33 @@ import { MessagesComponent } from '../../messages/messages.component';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  constructor(
+    public UserService: UserService,    
+  ) { }
+  
+  @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
+  Users : Users[] = []
 
+  ngOnInit() {
+    this.SelectUsers();
+  };
+
+
+  SelectUsers(){
+    this.UserService.ReturnUsers(-999,'U')
+    .subscribe({
+      next: (data: any) => {
+        if (data.code == "1000") {
+          this.Users = data.data
+        } else {
+          this.messagesComponent?.showError(data.message);
+        }
+      },
+      error: (error: any) => {
+        this.messagesComponent?.showError(error);
+      },
+    });
+  }
 
 }
 

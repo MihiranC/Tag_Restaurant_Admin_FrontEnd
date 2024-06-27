@@ -1,3 +1,5 @@
+
+@import 'colors.scss';
 .n-text-title{
     color: black;
     font-weight: 800;
@@ -15,7 +17,7 @@
 }
 
 .n-text-primary{
-    color: #063d16;
+    color: $primary-text-color;
     font-weight: 800;
 }
 
@@ -100,6 +102,13 @@
   color: white;
   font-size: xx-large;
   font-weight: 800;
+  letter-spacing: 0.5cm;
+}
+
+.title-footer-main{
+  color: white;
+  font-size: large;
+  font-weight: 400;
   letter-spacing: 0.5cm;
 }
 

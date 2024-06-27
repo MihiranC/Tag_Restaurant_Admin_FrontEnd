@@ -1,17 +1,20 @@
+
+@import 'colors.scss';
+
 body {
     font-family: Poppins;
-    background-color: #62755e;
+    background-color: $primary-color;
 }
 
 .nav-menu-header:hover .nav-icon{
-  color: #c5c4c4;
+  color: #8da8a7;
 }
 
 .nav-bar-container {
     float: left;
     width: 12em;
     margin-left:-11em;
-    background-color: #62755e;
+    background-color: $primary-color;
     height: 100vh;
     overflow: hidden;
     transition: width 0.3s;
@@ -21,7 +24,7 @@ body {
 .nav-icon{
   border: solid 1px;
   border-radius: 5px;
-  border-color: #3b5c31;
+  border-color: #556b6b;
   padding:5px;
 }
 
@@ -29,20 +32,20 @@ body {
   border-left: solid 1px;
   padding-left: 10px;
   margin-left: 22px;
-  color: #253125;
+  color: #8aabaf;
   font-weight: 400;
-  border-color: #3b5c31;
+  border-color: #556b6b;
 }
 
 .nav-sub-menues:hover{
-  border-color: #c5c4c4;
-  color: #c5c4c4;
+  border-color: #dceeed;
+  color: #dceeed;
   cursor: pointer;
 }
 
 .nav-sub-selected{
-  border-color: #c5c4c4;
-  color: #c5c4c4;
+  border-color: #dceeed;
+  color: #dceeed;
   cursor: pointer;
 }
 
@@ -64,7 +67,7 @@ body {
 .nav-bar {
     width: calc(100% );
     height: calc(100% );
-    background-color: #62755e;
+    background-color: $primary-color;
     color: #ffffff;
     transition: height 0.3s ease;
 }
@@ -99,7 +102,7 @@ body {
     padding-left: 3px;
     width: 100%;
     //background: linear-gradient(90deg, #ffffff, #437fc4);
-    background-color: #62755e;
+    background-color: $primary-color;
     height: 3px;
 }
 
@@ -156,7 +159,7 @@ body {
 }
 
 .icon-div:hover{
-    background: linear-gradient(60deg, #62755e, #75B4FF) ;
+    background: linear-gradient(60deg, $primary-color, #75B4FF) ;
     cursor: pointer;
 }
 
@@ -186,7 +189,7 @@ body {
     }
     .nav-bar-container {
         float: left;
-        background-color: #62755e;
+        background-color: $primary-color;
         height: 100vh;
         overflow: hidden;
         transition: width 0.3s;
@@ -225,8 +228,8 @@ body {
 }
 
 .drag-menu{
-  background-color: #62755e;
-  color: #c5c4c4;
+  background-color: $primary-color;
+  color: #8da8a7;
   text-align: center;
   cursor: pointer;
   border-radius: 50%;
@@ -234,4 +237,8 @@ body {
   width: 30px;
   vertical-align: middle;
   line-height: 30px !important; /* Align text vertically in the middle */
+}
+
+.inner-body-content{
+    margin-top: 15px;
 }

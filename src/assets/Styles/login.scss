@@ -1,5 +1,7 @@
+@import 'colors.scss';
+
 .loginbg {
-  background-image: url(../Images/LogingBGs/1.png);
+  background-image: url(../Images/LogingBGs/financeBG.svg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 95vh;
@@ -28,13 +30,17 @@
 .login-footer {
   height: 5vh;
   width: 100%;
+  color: white;
   overflow: hidden;
-  background-color: rgb(207, 207, 207);
+  background-color: $primary-color;
+  display: flex;            // Enables flexbox
+  justify-content: center;  // Centers horizontally
+  align-items: center;      // Centers vertically
 }
 
 .title-div{
   width: 100%;
-  color: white;
+  color: $primary-text-color;
   font-size: large;
   font-weight: 500;
   text-align: center;
@@ -44,7 +50,7 @@
 
 .title-div-main{
   width: 100%;
-  color: white;
+  color: $primary-text-color;
   font-size: xx-large;
   font-weight: 800;
   text-align: center;

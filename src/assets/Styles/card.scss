@@ -1,16 +1,14 @@
 .main-card-container{
     width:100%;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    margin:5px;
-    background-color: #EEF5FF;
-    padding: 10px 10px 0px 10px;
+    border-radius: 10px;
+    margin:2px;
+    background-color: #ffffff;
+    padding: 10px;
 }
 
 .main-card-title{
-    width: 100%;
-    color: #007BC2;
-    font-size: medium;
+    margin-left: 3px;
+    padding-bottom: 5px;
 }
 
 .main-card-body{

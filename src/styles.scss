@@ -2,9 +2,14 @@
 :root {
   font-family: "Poppins", sans-serif;
 }
+
 // // primeNG
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+
+@import url(./assets/Styles/colors.scss);
+
 
 @import url(./assets/Styles/layout.scss);
 @import url(./assets/Styles/menu.scss);

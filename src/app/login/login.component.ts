@@ -36,11 +36,7 @@ export class LoginComponent {
   router: any;
 
   backgroundImageUrls: string[] = [
-    'url(../../assets/Images/LogingBGs/1.png)',
-    'url(../../assets/Images/LogingBGs/2.png)',
-    'url(../../assets/Images/LogingBGs/3.png)',
-    'url(../../assets/Images/LogingBGs/4.png)',
-    'url(../../assets/Images/LogingBGs/5.png)'
+    'url(../../assets/Images/LogingBGs/financeBG.svg)'
   ];
 
   currentBackgroundIndex : number = 0;
