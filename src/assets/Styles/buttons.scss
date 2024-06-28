@@ -3,6 +3,10 @@ button {
     border-radius: 10px;
 }
 
+.primary-buttons{
+  min-width: 100px;
+}
+
 .p-button {
     padding: 2px 15px !important;
     border-radius: 5px;
@@ -31,7 +35,7 @@ button {
 .p-button-green {
     padding: 5px 30px !important;
     border-radius: 20px;
-    margin : 3px;
+    margin : 10px 3px;
     background-color: #6DC100;
     border-color: #6DC100;
     color: #060F3D;
@@ -40,7 +44,7 @@ button {
 .p-button-yellow {
   padding: 5px 30px !important;
   border-radius: 20px;
-  margin : 3px;
+  margin : 10px 3px;
   background-color: #ebd13f;
   border-color: #ebd13f;
   color: #060F3D;

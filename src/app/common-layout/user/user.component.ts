@@ -1,4 +1,4 @@
-import { Component, NgZone,ViewChild} from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { PrimeConfig } from '../../prime.config';
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 import { MessagesComponent } from '../../messages/messages.component';
 import { Login } from '../../Models/LoginModel';
 import { Users } from '../../Models/UserModel';
-import { Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
+import { UpdateData } from '../../Models/UpdateData';
 
 @Component({
   selector: 'app-user',
@@ -23,28 +24,32 @@ export class UserComponent {
   @ViewChild(FormGroupDirective, { static: false }) UserFormDirective: FormGroupDirective | undefined
   @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
 
+  Users: Users[] = []
+
   formData: any = {};
 
   ResponseObj: Response = new Response();
-  
+
   UserObject: Login = new Login()
 
   UserForm: FormGroup | undefined;
 
   UserList: Login[] | undefined;
 
-  OperationBtnText: string = 'Add'
+  OperationBtnText: string = 'Save'
   userObject: Users = new Users()
   usersList: Users[] = [];
   userID: number = 1;
+  readOnly: boolean | undefined = false;
+  updateData: UpdateData = new UpdateData()
 
   router: any;
 
   constructor(
-    public userService: UserService,
     private fb: FormBuilder,
     public Router: Router,
-    private zone: NgZone
+    private zone: NgZone,
+    public userService: UserService,
   ) {
 
     this.UserForm = this.fb.group({
@@ -57,13 +62,14 @@ export class UserComponent {
       addressLine2: new FormControl(),
       addressLine3: new FormControl(),
       addressLine4: new FormControl(),
-      email: new FormControl('', Validators.required)
+      email: new FormControl('', [Validators.required, Validators.email])
     });
 
   }
 
-  ngOnInit(): void { 
-    this.loadExistingUser();
+  ngOnInit(): void {
+    this.loadExistingUsers();
+    this.readOnly = false;
   }
 
 
@@ -79,53 +85,91 @@ export class UserComponent {
     this.userObject.mobileNo = this.UserForm!.value.mobileNo;
     this.userObject.email = this.UserForm!.value.email;
     this.userObject.roleCode = 'U';
-    if (this.OperationBtnText == "Add") {
+    if (this.OperationBtnText == "Save") {
       this.userObject.userID = -999;
       this.userService.InsertUsers(this.userObject)
         .subscribe({
           next: (data: any) => {
+            if (data.code == "1000") {
+              this.messagesComponent!.showSuccess('Successfully inserted')
+              this.clearForm();
+              this.loadExistingUsers();
+            }
+            else {
+              this.messagesComponent!.showError(data.message);
+            }
+          },
+          error: (error: any) => {
+            this.messagesComponent?.showError(error);
+          },
+        });
+    }
+    else {
+
+      this.updateData.newData = this.UserForm!.value
+      this.updateData.userID = this.userID
+
+      console.log('updateData',this.updateData)
+      this.userService.UpdateUsers(this.updateData)
+        .subscribe({
+          next: (data: any) => {
+            if (data.code == "1000") {
+              this.messagesComponent!.showSuccess('Successfully updated')
+              this.clearForm();
+              this.loadExistingUsers();
+            }
+            else {
+              this.messagesComponent!.showError(data.description);
+            }
+          },
+          error: (error: any) => {
+            this.messagesComponent?.showError(error);
+          },
+        });
+    }
+
+  }
+
+  selectDataToForm(row: any) {
+    this.readOnly = true;
+    this.UserForm!.patchValue({
+      userID: row.userID,
+      username: row.username,
+      firstName: row.firstName,
+      lastName: row.lastName,
+      mobileNo: row.mobileNo,
+      email: row.email,
+      addressLine1: row.addressLine1,
+      addressLine2: row.addressLine2,
+      addressLine3: row.addressLine3,
+      addressLine4: row.addressLine4,
+
+    });
+    this.updateData.oldData = this.UserForm!.value;
+    this.OperationBtnText = "Update";
+    //this.UserNameField=true
+  }
+
+  clearForm() {
+    this.UserForm!.reset();
+    this.OperationBtnText = "Save";
+    this.readOnly = false;
+  }
+
+  loadExistingUsers() {
+    this.userService.ReturnUsers(-999, 'U')
+      .subscribe({
+        next: (data: any) => {
           if (data.code == "1000") {
-            this.messagesComponent!.showSuccess('Successfully inserted')
-            this.clearForm();
-            this.loadExistingUser();
-          }
-          else {
-            this.messagesComponent!.showError(data.message);
+            this.Users = data.data
+          } else {
+            this.messagesComponent?.showError(data.message);
           }
         },
         error: (error: any) => {
           this.messagesComponent?.showError(error);
         },
       });
-  }
-    // else {
-
-    //   this.userService.UpdateUsers(this.updateDate)
-    //   .subscribe(data => {
-    //     if (data.code == "1000") {
-    //       this.messagesComponent!.showSuccess('Successfully updated')
-    //       this.clearForm();
-    //       this.loadExistingUser();
-    //     }
-    //     else {
-    //       this.messagesComponent!.showError(data.description)
-    //     }
-    //   }
-    //   );
-    // }
-
-  }
-
-  loadExistingUser() {
-    this.userService.ReturnUsers(-999,'U').subscribe(response => {
-      this.usersList = response.data
-      // this.dataSource = new MatTableDataSource(this.usersList);
-      // this.dataSource.paginator = this.paginator;
-    });
-  }
-
-  clearForm() {
-    this.UserForm!.reset();
   }
 }
 
