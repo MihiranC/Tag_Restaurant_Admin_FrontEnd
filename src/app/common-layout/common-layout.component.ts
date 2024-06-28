@@ -118,4 +118,8 @@ export class CommonLayoutComponent {
 
     this.Router.navigate(['/app/'+this.mainMenues[headerIndex].pages![pageIndex].path])
   }
+
+  logOut(){
+    this.Router.navigate(['']);
+  }
 }
