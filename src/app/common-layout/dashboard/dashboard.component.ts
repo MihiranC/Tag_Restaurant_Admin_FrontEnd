@@ -29,25 +29,10 @@ export class DashboardComponent {
   Users : Users[] = []
 
   ngOnInit() {
-    this.SelectUsers();
   };
 
 
-  SelectUsers(){
-    this.UserService.ReturnUsers(-999,'U')
-    .subscribe({
-      next: (data: any) => {
-        if (data.code == "1000") {
-          this.Users = data.data
-        } else {
-          this.messagesComponent?.showError(data.message);
-        }
-      },
-      error: (error: any) => {
-        this.messagesComponent?.showError(error);
-      },
-    });
-  }
+  
 
   onFilterGlobal(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
