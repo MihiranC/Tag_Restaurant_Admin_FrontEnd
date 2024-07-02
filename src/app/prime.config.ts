@@ -33,6 +33,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 
 @NgModule({
     declarations: [],
@@ -67,7 +70,9 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     InputNumberModule,
     ToggleButtonModule,
     InputSwitchModule,
-    PanelMenuModule
+    PanelMenuModule,
+    IconFieldModule,
+    InputIconModule
     //Add more modules as needed
     ],
 
@@ -101,7 +106,9 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     InputNumberModule,
     ToggleButtonModule,
     InputSwitchModule,
-    PanelMenuModule
+    PanelMenuModule,
+    IconFieldModule,
+    InputIconModule
         // Add more modules as needed
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
