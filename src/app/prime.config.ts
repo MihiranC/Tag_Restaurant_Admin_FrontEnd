@@ -33,7 +33,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelMenuModule } from 'primeng/panelmenu';
+<<<<<<< HEAD
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
+=======
 import { InputMaskModule } from 'primeng/inputmask';
+>>>>>>> 9aaaa75b106595eb779b97de484fac4cbb3a502a
 
 @NgModule({
     declarations: [],
@@ -69,6 +75,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     ToggleButtonModule,
     InputSwitchModule,
     PanelMenuModule,
+    IconFieldModule,
+    InputIconModule
     InputMaskModule
     //Add more modules as needed
     ],
@@ -104,6 +112,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     ToggleButtonModule,
     InputSwitchModule,
     PanelMenuModule,
+    IconFieldModule,
+    InputIconModule
     InputMaskModule
         // Add more modules as needed
     ],
